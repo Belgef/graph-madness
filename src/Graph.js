@@ -1,25 +1,25 @@
 import React from 'react';
 import p5 from 'p5';
 
-let t = 0, i = -200;
+let width = window.innerWidth-100, height = window.innerHeight-70;
+let t = 0, i = -width/2;
 
 class Graph extends React.Component {
     constructor(props) {
         super(props)
         this.myRef = React.createRef()
-        alert("created")
     }
 
     Sketch = (p) => {
 
         p.setup = () => {
-            p.createCanvas(400, 400);
-            p.background(220);
+            p.createCanvas(width, height);
+            p.background(136,227,230);
         }
 
         p.draw = () => {
-            p.translate(200, 200)
-            if (i >= 200) return;
+            p.translate(p.width/2, p.height/2)
+            if (i >= p.width/2) return;
             if (t < 1) t++;
             else {
                 t = 0
@@ -33,7 +33,6 @@ class Graph extends React.Component {
 
     componentDidMount() {
         this.myP5 = new p5(this.Sketch, this.myRef.current)
-        alert("mount")
     }
 
     render() {
